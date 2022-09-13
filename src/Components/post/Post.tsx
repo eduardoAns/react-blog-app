@@ -50,7 +50,6 @@ export const Post = () => {
           estado:'habilitado'
       }
 
-  
       try {
           
           const request = await blogApi.post('/comentario', dataPost);
@@ -105,9 +104,15 @@ export const Post = () => {
                 />
                 <div
                   className="fadeIn"
-                  style={{display: showMsg? 'flex':'none'}}
                 >
-                  {msg}
+                  <p className='text-danger'>
+                    {errors.contenido?.message}
+                  </p>
+                  <p className=' text-danger' >
+                    {errors.nombre?.message}
+                  </p>
+                  
+                  
                 </div>
                 <button type="submit" className='btn btn-primary '>Enviar</button>
               </form>
