@@ -13,6 +13,7 @@ export const PostList = () => {
     useEffect(() => {
         getPosts(setPosts);
     }, [])
+    
     return (
         <div className='row row-cols-2 animate__animated animate__fadeIn'>
                 {

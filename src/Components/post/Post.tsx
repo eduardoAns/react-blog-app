@@ -11,6 +11,7 @@ export const Post = () => {
         subtitulo: '',
         idUsuario: 0,
         contenido: '',
+        comentarios: []
     })
 
     const params = useParams()
@@ -25,11 +26,26 @@ export const Post = () => {
       {post!== null 
         ? (
           <div>
-            <h2>Personaje con el id {params.id}</h2>
-            <p>titulo:{post.titulo}</p>
-            <img src={logo} />
-          <p>contenido:{post.contenido}</p>
+            <h2>Post con el id {params.id}</h2>
+
+              <p>titulo:{post.titulo}</p>
+              <img src={logo} />
+              <p>contenido:{post.contenido}</p>
+              <hr />
+              <h4>Comentarios</h4>
+
+              {
+                post.comentarios.map(comentario => (
+                  <div key={comentario.id}>
+                    <p>Nombre: {comentario.titulo}</p>
+                    <p>Contenido: {comentario.contenido}</p>
+                    <hr />
+                  </div>
+              ))}
+
+              
           </div>
+          
         )
         :('no hai personaje') 
         
