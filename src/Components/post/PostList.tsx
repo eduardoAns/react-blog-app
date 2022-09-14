@@ -16,12 +16,13 @@ export const PostList = () => {
     
     return (
         <div className='container'>
-            <div className='row row-cols-2 animate__animated animate__fadeIn'>
+            <div className='row row-cols-1 animate__animated animate__fadeIn'>
                     {
                     posts.map(post =>(
                         <div className='card ms-2 mb-2' style={{maxWidth:500}} >
                             <div className='row no-gutters'>
                                 <div className='col-md-4'>
+                                    <p className='card-text text-dark'>{"id Usuario: "+ post.idUsuario}</p>
                                     <img src={logo} className='card-img' alt={post.titulo} />
                                 </div>
                                 <div className='col-md-8'>

@@ -7,10 +7,8 @@ export const PostBody = (post:post) => {
     <div className="container p-3">
       <div className='flex-row d-flex'>
         <div className='row '>
-          <h2>{post.titulo}</h2>
-          <h3>{post.subtitulo}</h3>
-          {/* image 500px*/}
-         
+          <h2>{post.titulo}</h2> 
+          <h3>{post.subtitulo}</h3>         
           <img src={logo} className='card-img max-width' alt={post.titulo} />
           <p>contenido:{post.contenido}</p>
         </div>

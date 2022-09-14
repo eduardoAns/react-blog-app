@@ -1,5 +1,4 @@
 import React from 'react'
-import { BrowserRouter } from 'react-router-dom'
 import { Routes, Route, NavLink } from "react-router-dom";
 import { Post } from '../Components/post/Post';
 import logo from '../logo.svg';
@@ -7,7 +6,6 @@ import { routes } from './routes';
 
 export const Navigation = () => {
   return (
-        <BrowserRouter>
             <div className='main-layout'>
                 <nav>
                     <img src={logo} alt="React logo" />
@@ -19,6 +17,10 @@ export const Navigation = () => {
                                 </li>
                             ))
                         }
+
+                                <li>
+                                    <NavLink to={"auth/login"}>Login</NavLink>
+                                </li>
 
                     </ul>
                 
@@ -32,6 +34,7 @@ export const Navigation = () => {
                     }
                     <Route path="/*" element={<h1>404 Page</h1>} />
                     <Route path="/post/:id" element = {<Post />} />
+                    
 
 
                 </Routes>
@@ -39,6 +42,5 @@ export const Navigation = () => {
 
             </div>
 
-        </BrowserRouter>
   )
 }

@@ -19,9 +19,17 @@ const blogApi = axios.create({
     }
 })
 
+const getUserByToken= async (token:string,state:React.Dispatch<React.SetStateAction<number>>) => {
+    const peticion = await axios.get(`https://blogback-production.up.railway.app/api/validtoken`, {'headers':{'Authorization':token}})
+    state(peticion.data.id)
+}
+
+
+
 
 export {
     getPosts,
     getPostById,
     blogApi,
+    getUserByToken,
 }
