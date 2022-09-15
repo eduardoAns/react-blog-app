@@ -1,5 +1,5 @@
 import axios from "axios";
-import { post } from "../interfaces/post";
+import { categoria, post } from "../interfaces/post";
 
 const getPosts = async ( state: React.Dispatch<React.SetStateAction<post[]>> ) => {
     const peticion = await axios.get('https://blogback-production.up.railway.app/api/post')
@@ -24,6 +24,11 @@ const getUserByToken= async (token:string,state:React.Dispatch<React.SetStateAct
     state(peticion.data.id)
 }
 
+const getCategorias = async ( state: React.Dispatch<React.SetStateAction<categoria[]>> ) => {
+    const peticion = await axios.get('https://blogback-production.up.railway.app/api/categoria')
+    state(peticion.data)
+}
+
 
 
 
@@ -32,4 +37,5 @@ export {
     getPostById,
     blogApi,
     getUserByToken,
+    getCategorias,
 }

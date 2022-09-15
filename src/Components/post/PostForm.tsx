@@ -1,28 +1,34 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie';
 import { useForm } from 'react-hook-form';
-import { blogApi } from '../../apiCall/post';
-import { postFormulario } from '../../interfaces/post';
+import { blogApi, getCategorias } from '../../apiCall/post';
+import { categoria, postFormulario } from '../../interfaces/post';
 
 type FormData = {
     titulo:string;
     subtitulo:string;
     contenido:string;
+    categoria:string;
 }
 
 export const PostForm = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm<FormData>();    
     const [cookies] = useCookies(['token']);
+    const [categorias, setCategorias ] = useState<categoria[]>([])
 
-    const addPost = async ({titulo,subtitulo,contenido}:FormData) => {
+    useEffect(() => {
+        getCategorias(setCategorias);
+    }, [])
+
+    const addPost = async ({titulo,subtitulo,contenido,categoria}:FormData) => {
         let idUser:number = 0;
         if(cookies){
             const{data} =  await blogApi.get('/validtoken', {'headers':{'Authorization': cookies.token}})
             idUser = data.id;
         }
 
-      const dataPost:postFormulario = {
+        const dataPost:postFormulario = {
             idUsuario:Number(idUser),
             titulo,
             subtitulo,
@@ -31,20 +37,20 @@ export const PostForm = () => {
             fechaActualizacion: "ayer",
             estado: "habilitado",
             categoria: {
-                id: 1,
+                id: Number(categoria),
                 nombre: ""
             },
             nombre:`usuario${idUser}`,
-      }
-      try {
-            console.log(dataPost)
-            const { data } = await blogApi.post('/post', dataPost);
-            console.log(data);
+        }
+        try {
+                console.log(dataPost)
+                const { data } = await blogApi.post('/post', dataPost);
+                console.log(data);
 
-      } catch (error) {
-          console.log("error", error);
-         
-      }
+        } catch (error) {
+            console.log("error", error);
+            
+        }
   
     }
 
@@ -76,6 +82,14 @@ export const PostForm = () => {
                                     />
                                 <label className='text-dark'>Subtitulo</label>
                             </div>
+                            <div className="form-floating mb-3">
+                                <select className='' {...register("categoria", { required: "la categoria es requerida" })}>
+                                    {categorias.map((categoria) => (
+                                        <option key={categoria.id} value={categoria.id}>{categoria.nombre}</option>
+                                    ))}
+                                </select>
+                            </div>
+                                
                             <div className="form-floating mb-3">
                                 <input 
                                     className="form-control" 
