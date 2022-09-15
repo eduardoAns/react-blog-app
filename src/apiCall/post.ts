@@ -23,6 +23,10 @@ const getUserByToken= async (token:string,state:React.Dispatch<React.SetStateAct
     const peticion = await axios.get(`https://blogback-production.up.railway.app/api/validtoken`, {'headers':{'Authorization':token}})
     state(peticion.data.id)
 }
+const getRolByToken= async (token:string,state:React.Dispatch<React.SetStateAction<String>>) => {
+    const peticion = await axios.get(`https://blogback-production.up.railway.app/api/validtoken`, {'headers':{'Authorization':token}})
+    state(peticion.data.rol)
+}
 
 const getCategorias = async ( state: React.Dispatch<React.SetStateAction<categoria[]>> ) => {
     const peticion = await axios.get('https://blogback-production.up.railway.app/api/categoria')
@@ -38,4 +42,5 @@ export {
     blogApi,
     getUserByToken,
     getCategorias,
+    getRolByToken
 }

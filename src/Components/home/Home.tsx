@@ -1,7 +1,9 @@
-import React from 'react'
+import React,{memo} from 'react'
 import { PostList } from '../post/PostList'
 
+
 export const Home = () => {
+  
   return (
     <div className='flex '>
         <h1 className=''>Home</h1>
@@ -9,3 +11,7 @@ export const Home = () => {
     </div>
   )
 }
+
+export default Home
+ 
+

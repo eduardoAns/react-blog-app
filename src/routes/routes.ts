@@ -1,15 +1,20 @@
 
+import { lazy } from 'react';
 import { About } from '../Components/about/About';
 import { Contact } from '../Components/contact/Contact';
-import {Home} from '../Components/home/Home';
 import { PostForm } from '../Components/post/PostForm';
 
+
+type JSXElement = () => JSX.Element;
 interface Route {
     to: string;
     path: string;
-    Component: () => JSX.Element;
+    Component: JSXElement|React.LazyExoticComponent<JSXElement>;
     name: string;
 }
+
+const Home = lazy(() => import(/* webpackChunkName:"Home" */ "../Components/home/Home"));
+
 
 
 export const routes:Route[] = [
@@ -28,12 +33,7 @@ export const routes:Route[] = [
         Component: Contact,
         name: "Contact"
     },
-    {
-        to: "/post-aca",
-        path:"post-aca",
-        Component: PostForm,
-        name: "Post aca"
-    }
+    
 
 
 ]
